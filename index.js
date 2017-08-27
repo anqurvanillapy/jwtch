@@ -21,7 +21,7 @@ export default class Jwtch {
   get token () { return localStorage.getItem(this.tokenKey) }
 
   _init () {
-    if (!fetch || !localStorage) {
+    if ([fetch, localStorage, Headers].every(Boolean)) {
       throw new Error('fetch or localStorage not supported')
     }
 
