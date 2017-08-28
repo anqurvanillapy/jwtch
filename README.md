@@ -7,13 +7,14 @@
 ## What?
 
 It adds `Authorization : Bearer <token>` header to the request for JWT signing.
-Simply an intermediate call of `Headers.append()`.  So **No black magic here**.
+Simply an intermediate call of `Headers.append()`.  So **No black magic here**,
+just for convenience.
 
 ## Usage
 
 ```js
 // Well, if there's no top-level await magic.
-(() => {
+(async () => {
 
 // Specify the token key in localStorage, 'token' by default.
 const jwtch = new Jwtch('token')
