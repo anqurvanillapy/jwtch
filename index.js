@@ -1,9 +1,3 @@
-const [
-  fetch,
-  localStorage,
-  Headers
-] = ['fetch', 'localStorage', 'Headers'].map(p => window[p])
-
 export default class Jwtch {
   constructor (k = 'token') {
     // Token key in localStorage.
@@ -12,8 +6,8 @@ export default class Jwtch {
     // Headers with `Authorization'.
     this.headers = null
 
-    // Check the availability of fetch and localStorage, and warn of the user
-    // if token not found.
+    // Warn of the user if token not found.  Note that `fetch' and
+    // `localStorage' support is not guaranteed.
     this._init()
   }
 
@@ -21,10 +15,6 @@ export default class Jwtch {
   get token () { return localStorage.getItem(this.tokenKey) }
 
   _init () {
-    if ([fetch, localStorage, Headers].every(Boolean)) {
-      throw new Error('fetch or localStorage not supported')
-    }
-
     if (!this.token) {
       console.warn('Token not found, go get one first before making requests')
     }
@@ -40,7 +30,7 @@ export default class Jwtch {
         // May not be a Headers object.
         options.headers.append('Authorization', `Bearer ${this.token}`)
       } catch (_) {
-        options['headers'] = this.headers
+        options.headers['Authorization'] = `Bearer ${this.token}`
       }
     } else options['headers'] = this.headers
 
