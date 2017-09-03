@@ -7,7 +7,7 @@
 ## What?
 
 It adds `Authorization : Bearer <token>` header to the request for JWT signing.
-Simply an intermediate call of `Headers.append()`.  So **No black magic here**,
+Simply an intermediate call of `Headers.append()`.  So **no black magic here**,
 just for convenience.
 
 ## Usage

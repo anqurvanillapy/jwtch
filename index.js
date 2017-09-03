@@ -12,7 +12,19 @@ export default class Jwtch {
   }
 
   get tokenKey () { return this._tkkey }
-  get token () { return localStorage.getItem(this.tokenKey) }
+  get token () {
+    const tk = localStorage.getItem(this.tokenKey)
+    let ret
+
+    // Might be an object, instead of a plain token string.
+    try {
+      ret = JSON.parse(tk)['token']
+    } catch (e) {
+      ret = tk
+    }
+
+    return ret
+  }
 
   _init () {
     if (!this.token) {
@@ -29,7 +41,7 @@ export default class Jwtch {
       try {
         // May not be a Headers object.
         options.headers.append('Authorization', `Bearer ${this.token}`)
-      } catch (_) {
+      } catch (e) {
         options.headers['Authorization'] = `Bearer ${this.token}`
       }
     } else options['headers'] = this.headers
