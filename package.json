@@ -2,8 +2,12 @@
   "name": "jwtch",
   "version": "1.1.0",
   "description": "`fetch` with JWT signing for browsers",
-  "main": "index.js",
+  "main": "dist/jwtch.js",
   "scripts": {
+    "clean": "rimraf ./dist",
+    "dev": "npm run clean && mkdirp ./dist && babel index.js -o ./dist/jwtch.js",
+    "build": "npm run dev && uglifyjs ./dist/jwtch.js -o ./dist/jwtch.min.js",
+    "prebulish": "npm run build",
     "test": "jest"
   },
   "repository": {
@@ -20,10 +24,18 @@
   },
   "homepage": "https://github.com/anqurvanillapy/jwtch#readme",
   "devDependencies": {
+    "babel-core": "^6.26.0",
     "babel-env": "^2.4.1",
     "babel-jest": "^20.0.3",
     "jest": "^20.0.4",
+    "mkdirp": "^0.5.1",
     "node-fetch": "^1.7.2",
-    "regenerator-runtime": "^0.11.0"
-  }
+    "regenerator-runtime": "^0.11.0",
+    "rimraf": "^2.6.1",
+    "uglify-js": "^3.0.28"
+  },
+  "files": [
+    "dist",
+    "index.js"
+  ]
 }
