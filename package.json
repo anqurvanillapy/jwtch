@@ -1,6 +1,6 @@
 {
   "name": "jwtch",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "`fetch` with JWT signing for browsers",
   "main": "dist/jwtch.js",
   "scripts": {
